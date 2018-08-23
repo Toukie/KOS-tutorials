@@ -1,2 +1,6 @@
 more list stuff:
 remove, add, insert etc
+
+local and global
+
+function delegates
