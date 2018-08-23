@@ -24,7 +24,7 @@ print ship:orbit:eccentricity. // shows the ship's eccentricity
 print ship:orbit:semimajoraxis. // shows the ship's semimajoraxis
 ```
 
-The full list of things you can add after :orbit can be found here:
+The full list of things you can add after `:orbit` can be found here:
 https://ksp-kos.github.io/KOS/structures/orbits/orbit.html
 
 Taking a step back, you can also look up values of planets
