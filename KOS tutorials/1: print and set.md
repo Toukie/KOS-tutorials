@@ -36,8 +36,8 @@ the entire sentence every time, we could use the set command.
 set x to "hello world".
 ```
 
-The set command 'sets' a certain value to the given variable. Everytime we refer
-to `x` we will actually refer to ``"hello world"`.
+The `set` command 'sets' a certain value to the given variable. Everytime we refer
+to `x` we will actually refer to `"hello world"`.
 
 ```
 set x to "hello world".
