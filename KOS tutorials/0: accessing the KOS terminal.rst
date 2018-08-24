@@ -1,4 +1,5 @@
-# Accessing the KOS terminal
+Accessing the KOS terminal
+==========================
 
 To use KOS you need to have a KOS processor on your vessel, they can be found under the 'control' tab in the editor and are under
 the same tab as the RCS thrusters and the reaction wheels.
@@ -7,34 +8,38 @@ KOS processor.
 
 There are two ways you can create KOS scripts: either you make them in game and edit them in game or you use a text editor.
 
-### Making scripts in-game
+Making scripts in-game
+______________________
 
 First we'll look at making and editing scripts in-game.
 Put your vessel with KOS processor on the launchpad and right click the processor.
 Press the button that says 'open terminal' and click on the window that just popped up.
 
-typing the following will create a file called 'hello', to enter the command press `ENTER` (don't forget the period at the end):
+typing the following will create a file called 'hello', to enter the command press ``ENTER`` (don't forget the period at the end):
 
-```
-edit hello.
-```
+::
+
+	edit hello.
+
 
 you can now edit the file and make your script for the processor to execute, the other tutorials will show how you can make a
 working script. Keep in mind that files made in game dissapear after the vessel is gone. This happens because you locally made a file on the ship's processor.
 
 To run the file, type:
 
-```
-run hello.
-```
+::
 
-### Making scrips with an editor
+	run hello.
 
-To use a text editor instead go to your KSP folder and go to `/Ships/Script/` and create an empty file and name it whatever you want
-(be cautious using spaces in filenames because this might mess stuff up). All KOS script files should end with `.ks`.
+
+Making scrips with an editor
+____________________________
+
+To use a text editor instead go to your KSP folder and go to ``/Ships/Script/`` and create an empty file and name it whatever you want
+(be cautious using spaces in filenames because this might mess stuff up). All KOS script files should end with ``.ks``.
 An example of a valid KOS script file name would be:
 
-`hello.ks`
+``hello.ks``
 
 Running files you made using text editors is a bit more complex than if you'd make a file in game.
 This is because when you make a script in game the script is locally stored on the ship.
@@ -44,8 +49,12 @@ space for data.
 
 To access the archive type:
 
-`switch to 0.`
+::
 
-To run hello.ks type the same as above:
+	switch to 0.
 
-`run hello.`
+To run ``hello.ks`` type the same as above:
+
+::
+
+	run hello.
