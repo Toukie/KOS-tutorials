@@ -611,6 +611,7 @@ the function it is in. ::
 
 Will show your orbital velocity for a circular orbit at 400 kilometers.
 
+========
 Suffixes
 ========
 
