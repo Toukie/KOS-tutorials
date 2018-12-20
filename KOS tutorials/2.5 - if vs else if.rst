@@ -1,10 +1,11 @@
+=====================
 ``if`` vs ``else if``
 =====================
 
 Hopefully you now know the basics of how ``if`` works. You might be wondering why use ``else if`` if it's the same as ``if``.
 
-Using ``else if``
-_______________
+Example 1, using ``else if``
+____________________________
 ::
 
 	if distance <= 1 {
@@ -15,8 +16,8 @@ _______________
 	  print "Distance is farther than 100 m.".
 	}
 
-Only using ``if``
-______________
+Example 2, only using ``if``
+____________________________
 ::
 
 	if distance <= 1 {
@@ -29,14 +30,17 @@ ______________
   	  print "Distance is farther than 1 kilometer.".
 	}
 
-We now run into some problems: if your distance is less than a meter you'll get the following messages: ::
+Using example 1, if your distance is less than a meter you'll get the following message: ::
+
+	Distance is within a meter.
+
+Using example 2, if your distance is less than a meter you'll get the following messages: ::
 
 	Distance is within a meter.
 	Distance is within 100 meters.
-	Distance is farther than 1 kilometer.
 
-As you can imagine this isn't good. If we're at less than a meter away from something and the commands for if we would be farther
-than 1 kilometer show up we have a big problem. This could be fixed by doing the following, but **THIS IS UNNECESSARILY** complex: ::
+As you can imagine the second example isn't good. If we're at less than a meter away from something and the messages for if we would be farther
+than 100 meters show up we have a big problem. This could be fixed by doing the following, but **THIS IS UNNECESSARILY COMPLEX**: ::
 
  set Done to false.
 

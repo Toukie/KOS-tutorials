@@ -1,3 +1,4 @@
+==================
 Lists and lexicons
 ==================
 
@@ -56,6 +57,15 @@ In this case it prints: ::
   10
   15
   20
+
+You can also use variables to check an item in a list: ::
+
+  set x to 3.
+  print ValueList[x]. // shows 15
+
+Does the same as: ::
+
+  print ValueList[3]. // also shows 15
 
 Lexicons
 ________

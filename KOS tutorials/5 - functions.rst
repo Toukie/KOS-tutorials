@@ -1,3 +1,4 @@
+=========
 Functions
 =========
 
@@ -118,10 +119,10 @@ ________________________
 Here's an example of a more complex function which has a parameter and will also work in KOS:
 
 Let's say we're in a perfectly circular orbit around kerbin, we can use the following formula:
-``velocity = (2 \* pi * radius) / orbital period``
+``velocity = (2 * pi * radius) / orbital period``
 (https://en.wikipedia.org/wiki/Circular_motion#Formulas)
 
-Ignore how ``ship:orbit:period`` works for now, that will be discussed in the next tutorial. ::
+Ignore how ``ship:orbit:period`` works for now, that will be discussed in the next chapter. ::
 
   Function VelocityCalculator {
     Parameter OrbitHeight.
@@ -149,6 +150,7 @@ the function it is in. ::
     set TotalRadius to OrbitHeight + KerbinRadius.
     set OrbitalPeriod to ship:orbit:period.
     return (2 * 3.1416 * TotalRadius) / OrbitalPeriod.
+    // everything after the return command will be skipped because a return command ends a function.
     print "this will be skipped".
   }
 
