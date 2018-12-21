@@ -67,6 +67,27 @@ Does the same as: ::
 
   print ValueList[3]. // also shows 15
 
+You can also add and remove items from a list by using ``ListName:add(SomeVarialbeOrText)``: ::
+
+  set Value1 to 0.
+  set Value2 to 5.
+  set Value3 to 10.
+  set ValueList to list(Value1, Value2, Value3).
+
+  set Value4 to 15.
+  set Value5 to 20.
+  ValueList:add(Value4).
+  ValueList:add(Value5).
+  print ValueList.
+
+This will print: ::
+
+  0
+  5
+  10
+  15
+  20
+
 Lexicons
 ________
 
