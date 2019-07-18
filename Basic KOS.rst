@@ -99,6 +99,9 @@ To clear the screen type: ::
 
 	clearscreen.
 
+To scroll up and down in the KOS terminal press ``PG UP`` or ``PG DN``.
+TO manually exit a script press ``CTRL`` + ``C``.
+
 Now say that we really like to use our hello world command but don't want to type
 the entire sentence every time, we could use the set command. ::
 
@@ -458,6 +461,22 @@ Does the same as: ::
 
   print ValueList[3]. // also shows 15
 
+More list actions
+_________________
+
+You can also add, insert and remove items from a list: ::
+
+  set MyList to list(). // creates an empty list
+  MyList:add("First string!").
+  MyList:add("Second string!").
+  MyList:add("Third string!").
+  print MyList. // shows all items in MyList
+  print Mylist[0]. // shows "First string!"
+  MyList:remove(0). // removes the item with index 0, which is the first item
+  print MyList[0]. // shows "Second string" because the original first item was removed
+  MyList:insert(0, "First string is back!"). // this adds an item in the list at the given index
+  print MyList[0]. // shows "First string is back!"
+
 Lexicons
 ________
 
@@ -644,10 +663,10 @@ the function it is in. ::
 Will show your orbital velocity for a circular orbit at 400 kilometers.
 
 ========
-Suffixes
+Structures and suffixes
 ========
 
-In KOS you can access information about orbits using special structures.
+In KOS you can access information about orbits and other things using special structures.
 Let's start with things we can check about our ship's orbit. ::
 
   print ship:orbit:apoapsis. // shows the ship's apoapsis
@@ -685,3 +704,134 @@ If you're currently orbiting kerbin, the following is true: ::
 
 More information about that here:
 https://ksp-kos.github.io/KOS/structures/orbits/orbitable.html
+
+You can also use suffixes on variables: ::
+
+  set MyShip to ship.
+  print MyShip:mass. // shows the ship's mass
+
+You can't use variables as suffixes: ::
+  set MyValue to "apoapsis".
+  print ship:orbit:MyValue. // shows an error
+
+========
+Triggers
+========
+
+``when`` / ``then`` is a trigger that will check in the background if the condition has been met, it does not block code that comes after it ::
+
+  When altitude > 70000 then {
+    print "we are in space!". // doesnt show up unless we are already above 70000 meters when running the script
+  }
+  print "are we there yet?".  // "are we there yet?" will show up immediatly because the when / then block doesnt block future code
+
+Because ``when`` / ``then`` checks if the condition has been met every physics tick (every fraction of a second when KSP updates the physics), ``when`` / ``then`` triggers can slow down the KOS processor when you use them too much. It's good practice to avoid using ``when`` / ``then`` if possible.
+
+Because ``when`` / ``then`` triggers were designed for some quick piece of code it is important to keep ``when`` / ``then`` triggers as small as possible.
+Avoid loops like ``until``, the ``when`` / ``then`` loop should be finished within a physics tick (you can configure the instructions per update from 50 instructions per update to 2000).
+
+``when`` / ``then`` loops only run once by default, if you want to keep the loop you can add ``preserve`` to the code block. ::
+
+  when maxthrust = 0 then {
+    stage.
+    preserve.
+  }
+
+This will stage each time when the max thrust is 0.
+
+Bad ``when`` / ``then`` loop example
+_____________________________________
+This is an example of bad code because it uses a lot of unnecessary ``when`` / ``then`` loops. ::
+
+  when altitude > 1000 then {
+    print "altitude: 1 km".
+    lock steering to heading(90, 90).
+  }
+
+  when altitude > 10000 then {
+    print "altitude: 10 km".
+    lock steering to heading(90, 80).
+  }
+
+  when altitude > 25000 then {
+    print "altitude: 25 km".
+    lock steering to heading(90, 70).
+  }
+
+  when altitude > 50000 then {
+    print "altitude: 50 km".
+    lock steering to heading(90, 60).
+  }
+
+  when altitude > 70000 then {
+    print "in space".
+    lock steering to heading(90, 50).
+  }
+
+  when ship:orbit:apoapsis < 70000 then {
+    set ApoDifference to 70000 - ship:orbit:apoapsis.
+    print "Distance between our apoapsis and space: " + ApoDifference at(0, 5).
+    preserve.
+  }
+
+  wait until altitude > 70000.
+
+``when`` / ``then`` loop example correction
+_____________________________________
+
+The previous example can be corrected by using ``wait until``, ``until`` and ``if`` loops. ::
+
+  wait until altitude > 1000.
+  print "altitude: 1 km".
+  lock steering to heading(90, 90).
+
+  wait until altitude > 10000.
+  print "altitude: 10 km".
+  lock steering to heading(90, 80).
+
+  wait until altitude > 25000.
+  print "altitude: 25 km".
+  lock steering to heading(90, 70).
+
+  wait until altitude > 50000.
+  print "altitude: 50 km".
+  lock steering to heading(90, 60).
+
+  wait until altitude > 70000.
+  print "in space".
+  lock steering to heading(90, 50).
+
+Now we're still missing the last code block which prints the distance between our apoapsis and space.
+We can use an ``until`` loop to update the text without using ``when`` / ``then`` loops. ::
+
+  until altitude > 70000 {
+
+    if altitude > 1000 {
+      print "altitude: 1 km   " at(0, 3).
+      lock steering to heading(90, 90).
+    }
+
+    if altitude > 10000 {
+      print "altitude: 10 km  " at(0, 3).
+      lock steering to heading(90, 80).
+    }
+
+    if altitude > 25000 {
+      print "altitude: 25 km  " at(0, 3).
+      lock steering to heading(90, 70).
+    }
+
+    if altitude > 50000 {
+      print "altitude: 50 km  " at(0, 3).
+      lock steering to heading(90, 60).
+    }
+
+    if altitude > 70000 {
+      print "in space         " at(0, 3).
+      lock steering to heading(90, 50).
+    }
+
+    set ApoDifference to 70000 - ship:orbit:apoapsis.
+    print "Distance between our apoapsis and space: " + ApoDifference at(0, 5).
+    wait 0. // we only have to update every physics tick
+  }
