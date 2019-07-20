@@ -331,7 +331,7 @@ Before we can talk about more complex until loops let's first talk about ``time:
 
   print time:seconds.
 
-Will print the current time in seconds. Let's say the in-game time is 1 minute.
+Will print the current time in seconds since the start of your saved game. Let's say the in-game time is 1 minute.
 It would print ``60``. You can also set the current in-game time as a variable: ::
 
   set CurrentTime to time:seconds.
@@ -728,9 +728,9 @@ Triggers
 Because ``when`` / ``then`` checks if the condition has been met every physics tick (every fraction of a second when KSP updates the physics), ``when`` / ``then`` triggers can slow down the KOS processor when you use them too much. It's good practice to avoid using ``when`` / ``then`` if possible.
 
 Because ``when`` / ``then`` triggers were designed for some quick piece of code it is important to keep ``when`` / ``then`` triggers as small as possible.
-Avoid loops like ``until``, the ``when`` / ``then`` loop should be finished within a physics tick (you can configure the instructions per update from 50 instructions per update to 2000).
+Avoid loops like ``until``, the ``when`` / ``then`` loop should be finished within a physics tick. If you keep the code fairly short this generally isn't a problem.
 
-``when`` / ``then`` loops only run once by default, if you want to keep the loop you can add ``preserve`` to the code block. ::
+``when`` / ``then`` triggers only run once by default, if you want to keep the trigger you can add ``preserve`` to the code block. ::
 
   when maxthrust = 0 then {
     stage.
@@ -739,9 +739,9 @@ Avoid loops like ``until``, the ``when`` / ``then`` loop should be finished with
 
 This will stage each time when the max thrust is 0.
 
-Bad ``when`` / ``then`` loop example
+Bad ``when`` / ``then`` trigger example
 _____________________________________
-This is an example of bad code because it uses a lot of unnecessary ``when`` / ``then`` loops. ::
+This is an example of bad code because it uses a lot of unnecessary ``when`` / ``then`` triggers. ::
 
   when altitude > 1000 then {
     print "altitude: 1 km".
@@ -801,8 +801,8 @@ The previous example can be corrected by using ``wait until``, ``until`` and ``i
   print "in space".
   lock steering to heading(90, 50).
 
-Now we're still missing the last code block which prints the distance between our apoapsis and space.
-We can use an ``until`` loop to update the text without using ``when`` / ``then`` loops. ::
+Now we're still missing the last piece of code which prints the distance between our apoapsis and space.
+We can use an ``until`` loop to update the text without using ``when`` / ``then`` triggers. ::
 
   until altitude > 70000 {
 
